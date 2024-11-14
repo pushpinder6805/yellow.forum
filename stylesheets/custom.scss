@@ -1,0 +1,213 @@
+// Share Modal
+// *------------------------------------------------*
+button.invite, button.new-topic {
+  display: none;
+}
+
+// Share Link
+// *------------------------------------------------*
+.actions button.post-action-menu__copy-link {
+  background-color: #ffef3f !important;
+}
+
+.actions button.post-action-menu__copy-link svg {
+  color: #666666;
+}
+.actions button.post-action-menu__copy-link span {
+  margin-left: 4px;
+  color: #666666;
+}
+
+// Header
+// *------------------------------------------------*
+
+// hide the icon on the login button
+button.login-button > .d-icon-user {
+  display: none;
+}
+
+.custom-header-links li.headerLink a {
+  padding: .6em 1em;
+  background-color: #ffef3f;
+  filter: drop-shadow(0px 0px 4px rgb(33 33 33 / 15%));
+  border-radius: 4px;
+}
+
+li.search-dropdown {
+  display: none;
+}
+
+// Signup/Login
+// *------------------------------------------------*
+
+.create-account .d-modal__footer-buttons #login-link {
+  display: none;
+}
+
+.login-left-side #new-account-link {
+  display: none;
+}
+
+.login-right-side {
+    display: none;
+}
+
+// Topic Header
+// *------------------------------------------------*
+.category-breadcrumb {
+  display: none;
+}
+
+#navigation-bar {
+  display: none;
+}
+
+// Accent
+// *------------------------------------------------*
+#main-outlet-wrapper #main-outlet {
+  border-top: 8px solid #e9e9e9;
+}
+
+#main-outlet {
+  border-top: 8px solid #e9e9e9;
+}
+
+// About
+// *------------------------------------------------*
+section.about.description {
+  margin-bottom: 0;
+}
+
+section.about.stats {
+  display: none;
+}
+
+// Nav
+// *------------------------------------------------*
+
+.sidebar-section[data-section-name=messages], .sidebar-section[data-section-name=tags] {
+  display: none;
+}
+
+.sidebar-section-link-wrapper[data-list-item-name=all-categories] {
+  display: none;
+}
+
+.sidebar-footer-container {
+  justify-content: center;
+}
+
+.sidebar-section-wrapper .sidebar-section-header-wrapper {
+  display: none;
+}
+
+// Category
+// *------------------------------------------------*
+.category-box .category-logo.aspect-image img {
+  height: var(--max-height) !important;
+  width: var(--max-height) !important;
+}
+
+.topic-list-bottom > .footer-message {
+  display: none !important;
+}
+
+.category-boxes .subcategories {
+  display: none;
+}
+
+// is z-index necessary here?  it interferes with the exit-intent popup box
+.topic-thumbnails-grid,
+.topic-thumbnails-masonry {
+  .activity,
+  .main-link,
+  .posters {
+    z-index: auto;
+  }
+}
+
+// Gated Topic
+// *------------------------------------------------*
+.custom-gated-topic-container {
+  background-color: #ffef3f;
+}
+
+.custom-gated-topic-content--cta__signup > button.sign-up-button {
+  // should we change the background color of the button? (it's yellow on yellow with gray hover)
+}
+
+// Subscriptions
+// *------------------------------------------------*
+// this fixes an override in common.scss:176
+.subscribe-buttons .btn.btn-primary {
+  color: var(--secondary);
+  background-color: var(--tertiary);
+  &:hover,
+  &.btn-hover {
+    background-color: #666666;
+    color: #ffffff;
+  }
+}
+
+// Global
+// *------------------------------------------------*
+// override tertiary color for links
+// but don't set this too strongly (e.g. !important) as links in other areas may be colored differently
+a, a:visited {
+  color: #0055ff;
+}
+
+// Welcome Link Banner
+// *------------------------------------------------*
+.above-main-container-outlet.welcome-link-banner-connectors .welcome-link-banner {
+  padding: 0;
+}
+
+.above-main-container-outlet.welcome-link-banner-connectors .welcome-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  filter: drop-shadow(0px 0px 10px rgb(33 33 33 / 40%));
+  border-radius: 7px;
+}
+
+.above-main-container-outlet.welcome-link-banner-connectors .welcome-content p {
+  margin-bottom: 10px;
+}
+
+// *------------------------------------------------*
+// MOBILE
+// *------------------------------------------------*
+
+.login-welcome-header img {
+  display: none;
+}
+
+.login-welcome-header p {
+  display: none;
+}
+
+tr.category-topic-link {
+  display: none;
+}
+
+footer.category-topics-count {
+  display: none;
+}
+
+table.topic-list {
+  margin-bottom: 12px;
+}
+
+.categories-list .category-list td:last-child {
+  padding-bottom: 0;
+}
+
+// override hiding this on mobile
+.panel .header-buttons .sign-up-button {
+  display: inline-flex;
+}
+
+.login-modal-body #new-account-link {
+  display: none;
+}
+

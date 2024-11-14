@@ -1,0 +1,231 @@
+<script type="text/discourse-plugin" version="1.24.0">
+  const tag_id = 'remove-topics-from-categories'
+  const regex_category_page = /\/c\/(\w+)\/\d+/
+  const regex_product_page = /\/s\/(\w+)/
+  const regex_topic_page = /\/t\/(\w+)/
+
+  api.onAppEvent("sidebar-hamburger-dropdown:rendered", add_donate_button)
+
+  // Each helper function here is a "feature" that triggers when its conditions are met.
+  // For instance: if we're on the target page.
+  api.onPageChange((url, title) => {
+    console.log('page changed:', url, 'title:', title)
+    remove_topics()
+    subscribe_selector()
+    remove_header_links_when_not_logged_in()
+    add_donate_button()
+    watch_hamburger_menu()
+    //setTimeout(watch_hamburger_menu, 50)
+    update_share_button()
+    activate_exit_popup()
+  })
+
+  function update_share_button() {
+    const matches = window.location.pathname.match(regex_topic_page)
+    const share_links = document.querySelectorAll('.actions button.post-action-menu__copy-link svg')
+    if (matches != null ) {
+      share_links.forEach(l => {
+        const share_text = document.createElement('span')
+        share_text.textContent = 'Share'
+        l.after(share_text)
+      })
+    }
+  }
+
+  // Remove Topics (from Categories Pages)
+  // (so only the subcategories will display)
+  // *------------------------------------------------*
+  function remove_topics() {
+    // if the page we're on is on this list of categories
+    const target_categories = ['experts', 'initiatives', 'agendas']
+    const matches = window.location.pathname.match(regex_category_page)
+    if (matches != null && target_categories.includes(matches[1])) {
+
+      // then create a style tag to remove topics from the listing
+      const styles = `
+        .topic-list-body {display: none !important;}
+      `
+      const tag = document.createElement('style')
+      tag.type = 'text/css'
+      tag.id = tag_id
+      if (tag.styleSheet) {
+        tag.styleSheet.cssText = styles
+      }
+      else {
+        tag.append(document.createTextNode(styles))
+      }
+      document.head.append(tag)
+    } else {
+
+      // otherwise, remove the tag so other pages can see these items
+      document.querySelectorAll('#' + tag_id).forEach(el => el.remove())
+    }
+  }
+
+  // Subscribe Selector
+  // (Provide a currency selector to filter subscription plans)
+  // *------------------------------------------------*
+  // currency should be either £ or $
+  const currency_options = ['£', '$']
+  function show_subscribe_options(currency) {
+    if (!currency_options.includes(currency)) throw new Error(`invalid currency option: ${currency}`)
+    Array.from(document.querySelectorAll('.btn-discourse-subscriptions-subscribe')).forEach(el => {
+      if (el.querySelector('.amount')?.textContent?.includes(currency)) {
+        el.style = ''
+      } else {
+        el.style = 'display: none;'
+      }
+    })
+  }
+
+  function display_currency_dropdown() {
+    // find the plans section
+    const plans_section = document.querySelector('.subscribe-buttons').parentElement
+    const plans_description = plans_section.querySelector('p')
+
+    // construct a currency dropdown
+    const currency_dropdown = document.createElement('select')
+    currency_dropdown.id = 'currency-dropdown'
+    currency_dropdown.style = 'display: inline-block; margin-left: 1em; width: 4em;'
+    currency_options.forEach(o => {
+      const el = document.createElement('option')
+      el.value = o
+      el.text = o
+      currency_dropdown.append(el)
+    })
+
+    // when the currency dropdown updates, hide/show the appropriate plans
+    currency_dropdown.addEventListener('change', e => {
+      console.log('currency changed:', e.target.value)
+      show_subscribe_options(e.target.value)
+    })
+    // show_subscribe_options()
+
+    // alter the text to be a label for the currency dropdown
+    plans_description.textContent = "Currency:"
+
+    // put the dropdown after the description
+    plans_description.style = 'display: inline-block;'
+    plans_description.after(currency_dropdown)
+  }
+
+  // hacky hacky way of getting additional HTML into the subscription page
+  function update_description() {
+    const description = `
+<h2>Yellow.Forum Subscription</h2>
+<hr>
+<p>We offer three supporting memberships: Bronze, Silver and Gold. Each one provides you with a badge next to your profile picture, recognizing your level of contribution.</p>
+
+Supporting members will be able to chat with Experts on the forum, and will have opportunities to participate in live events including our upcoming <a href="/t/interactive-debate-show/47">Live Interactive Debate Show</a>.
+
+<p>Once per month, Gold members will be invited to a live Q&A with founders Richard and Brandon, which will be posted two days later in Yellow.Forum and on social media.</p>
+
+<p>As a non-profit organisation, 100% of your Supporting Membership helps fund <a href="/about">Our Mission</a>.</p>
+
+<p>Thank you for your support!</p>
+<p><strong>Richard & Brandon</strong></p>
+    `
+    const container = document.querySelector('.discourse-subscriptions-confirmation-billing')
+    container.innerHTML = description
+  }
+
+  function subscribe_selector() {
+    // if we're on the subscription page
+    const target_products = ['prod_QGl85xW80N0SQz']
+    const matches = window.location.pathname.match(regex_product_page)
+    if (matches != null && target_products.includes(matches[1])) {
+
+      show_subscribe_options('£') // show £ by default
+      display_currency_dropdown()
+      update_description()
+    }
+  }
+
+  function remove_header_links_when_not_logged_in() {
+    if (api.getCurrentUser()) return
+    const subscribe = document.querySelector('.custom-header-links a[href="/s"]')
+    if (subscribe) subscribe.parentElement.remove()
+  }
+
+  function add_donate_button() {
+    console.log('adding donate button')
+    // locate the sidebar footer
+    const footer = document.querySelector('.sidebar-footer-actions')
+
+    // if the footer's not here or the stripe button already exists, there's nothing to do
+    if (!footer || footer.querySelector('stripe-buy-button')) return
+
+    // trash whatever is there
+    while (footer.firstChild) {
+      footer.removeChild(footer.lastChild);
+    }
+
+    // add the stripe button to the page
+    const button_embed = document.createElement('stripe-buy-button')
+    button_embed.setAttribute('buy-button-id', 'buy_btn_1PTVIRIdwyDCjzwhf7PlhZ5X')
+    button_embed.setAttribute('publishable-key', 'pk_live_51IDs5BIdwyDCjzwhKGrADpwGPeLBRjEr5GGo9bXFn9WE1F9JpreSaLtPyIffsCHbcYxK0iDduNkorgnhuRIfDdQc00ISSdXiYE')
+
+    function overrideStyle() {
+      // override the button style to make the width: 200px
+      button_embed.shadowRoot.querySelector('iframe').style = "display: inline-block !important;margin: 0px !important;padding: 0px !important;border: none !important;width: 200px !important;height: 44px !important;transition: height 0.01s linear 0s !important;color-scheme: light only !important;"
+
+      //footer.insertAdjacentHTML('afterbegin', button_embed)
+      footer.prepend(button_embed)
+    }
+
+    // I had some issues with the querySelector code erroring out in the shadow DOM...
+    // solving that through polling
+    function whenShadowDomIsReady(fn) {
+      if (button_embed.shadowRoot) {
+        overrideStyle()
+      } else {
+        setTimeout(fn, 10)
+      }
+    }
+
+    whenShadowDomIsReady(overrideStyle)
+  }
+
+  window._onSidebarClicked = function() {
+    setTimeout(() => {
+      const footer = document.querySelector('.sidebar-footer-container')
+      console.log('footer:', footer)
+      footer.remove()
+    }, 50)
+  }
+
+  function watch_hamburger_menu() {
+    // look up whether we're on mobile
+    const site = api._lookupContainer("service:site")
+    console.log('mobile?', site?.mobileView)
+
+    // Discourse renders the toggle with entirely different class/id structure based on mobile or desktop.
+    // see top of file: api.onAppEvent("sidebar-hamburger-dropdown:rendered") for mobile variation of this code
+    if (site?.mobileView) {
+      console.log('no listeners added for mobile')
+    } else {
+      // make sure the toggle exists
+      const toggle = document.querySelector('.header-sidebar-toggle button')
+      if (!toggle) return console.log('could not find menu toggle:', selector)
+
+      // wait for the sidebar to render and then add the donate button
+      toggle.addEventListener('click', () => setTimeout(add_donate_button, 50))
+      console.log('added desktop event listeners')
+    }
+  }
+
+  let ouibounce_activated = false
+  function activate_exit_popup() {
+    if (api.getCurrentUser()) return
+    if (ouibounce_activated) return
+    ouibounce(document.getElementById('ouibounce-modal'), {aggressive: true})
+    ouibounce_activated = true
+  }
+</script>
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+<style>
+.sidebar-footer-wrapper .sidebar-footer-actions {
+  margin-left: 0 !important;
+  margin-bottom: 10px;
+}
+</style>

@@ -1,0 +1,306 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ouibounce/0.0.12/ouibounce.min.js" integrity="sha512-3YT22Fw1AUW4I3ww7mROUxleX/WhHY1uh6ZbWL5bRyqDNc8UE8UQf4otTicqtpzXEeSa2Ct3aZ/8gpjVcsz9LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--<script src="https://app.captchacomplete.com/send.js"></script>-->
+
+<div id="ouibounce-modal">
+  <div class="underlay"></div>
+  <div class="modal">
+    <div class="modal-body">
+      <h3>Receive our Weekly Newsletter</h3>
+
+      <p>Follow our investigation into The Great Reset transition to Stakeholder Capitalism by subscribing to our free newsletter.</p>
+
+      <form name="email-list"
+        cc-key="MSLvE6SN3RsLpaBpb3p1Da9A/vrD0JygLG5dkHuWfyk="
+        cc-google-sitekey="6LcHfi4qAAAAAP4wuPULl9F2sBY4OccXHiKL0wXe">
+        <input type="text" name="email" placeholder="you@email.com">
+        <input type="submit" value="Subscribe">
+        <p class="form-notice">* I agree to receive updates from Yellow.Forum.</p>
+      </form>
+
+      <p>Please also check us out on social media:</p>
+      <div class="center-row">
+        <a href="https://x.com/YellowForum" class="icon-social twitter">X</a> |
+        <a href="https://www.instagram.com/yellow.forum" class="icon-social instagram">Instagram</a> |
+        <a href="https://www.facebook.com/yellow.forum" class="icon-social facebook">Facebook</a> |
+        <a href="https://www.youtube.com/@YellowForum" class="icon-social youtube">YouTube</a> |
+        <a href="https://rumble.com/user/yellowforum" class="icon-social rumble">Rumble</a>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <p>no thanks</p>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+const GHL_HOOK = "https://services.leadconnectorhq.com/hooks/Ei9R8AN5gy2kSi34vpeq/webhook-trigger/d1af52be-d62a-407a-b0c5-170bd6aa3882"
+async function sendRequest(fields, DEBUG) {
+  const form = new URLSearchParams(fields)
+
+  // send the request
+  if (DEBUG) console.log('sending request:', fields)
+  const response = await fetch(GHL_HOOK, {
+    mode: "cors",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Accept": "application/json"
+    },
+    body: form
+  })
+  if (DEBUG) console.log('results:', await response.text())
+  // 200 OK means it succeeded
+}
+
+//const modal = ouibounce(document.getElementById('ouibounce-modal'), {
+//  aggressive: true
+//})
+function closeModal() {
+  document.querySelector('#ouibounce-modal').style = "display: none;"
+}
+document.querySelector('#ouibounce-modal .modal-footer')
+  .addEventListener('click', closeModal)
+document.querySelector('.underlay')
+  .addEventListener('click', closeModal)
+document.querySelector('#ouibounce-modal form')
+  .addEventListener("submit", function(event){
+    event.preventDefault()
+    const email = document.querySelector('#ouibounce-modal form input[name=email]').value
+    sendRequest({email})
+    closeModal()
+  })
+
+</script>
+
+<style>
+.center-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+.center-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.icon-social {
+  /* width: 35px;
+  height: 35px; */
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.icon-social.twitter {
+  background-image: url($twitter)
+}
+.icon-social.instagram {
+  background-image: url($instagram)
+}
+.icon-social.facebook {
+  background-image: url($facebook)
+}
+.icon-social.youtube {
+  background-image: url($youtube)
+}
+.icon-social.rumble {
+  background-image: url($foo)
+}
+
+</style>
+
+<style>
+#ouibounce-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+}
+#ouibounce-modal .underlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  cursor: pointer;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
+}
+#ouibounce-modal .modal {
+  width: 600px;
+  height: 350px;
+  background-color: #f0f1f2;
+  z-index: 1;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 4px;
+  -webkit-animation: popin 0.3s;
+  animation: popin 0.3s;
+}
+#ouibounce-modal .modal-title {
+  font-size: 18px;
+  background-color: #252525;
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+  border-radius: 4px 4px 0 0;
+  text-align: center;
+}
+#ouibounce-modal h3 {
+  font-size: 1em;
+  margin: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#ouibounce-modal .modal-body {
+  padding: 20px 35px;
+  font-size: 0.9em;
+}
+#ouibounce-modal p {
+  color: #344a5f;
+  line-height: 1.3em;
+  text-align: center;
+}
+#ouibounce-modal form {
+  text-align: center;
+  margin-top: 35px;
+}
+#ouibounce-modal form input[type=text] {
+  padding: 12px;
+  font-size: 1.2em;
+  width: 300px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  -webkit-font-smoothing: antialiased;
+}
+#ouibounce-modal form input[type=submit] {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  color: #1b1b1b;
+  background-color: #ffef3f;
+  border: none;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+}
+#ouibounce-modal form p {
+  text-align: left;
+  margin-left: 55px;
+  opacity: 0.8;
+  margin-top: 1px;
+  padding-top: 1px;
+  font-size: 0.9em;
+}
+#ouibounce-modal .modal-footer {
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+#ouibounce-modal .modal-footer p {
+  text-transform: capitalize;
+  cursor: pointer;
+  display: inline;
+  border-bottom: 1px solid #344a5f;
+}
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-ms-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes popin {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  85% {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-ms-keyframes popin {
+  0% {
+    -ms-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  85% {
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes popin {
+  0% {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  85% {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+</style>

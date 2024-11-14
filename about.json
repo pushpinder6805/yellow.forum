@@ -1,0 +1,50 @@
+{
+  "name": "Radiant (Yellow)-local",
+  "component": false,
+  "license_url": null,
+  "about_url": null,
+  "authors": null,
+  "theme_version": null,
+  "minimum_discourse_version": null,
+  "maximum_discourse_version": null,
+  "assets": {
+    "facebook": "assets/facebook.svg",
+    "instagram": "assets/instagram.svg",
+    "rumble": "assets/rumble.svg",
+    "twitter": "assets/twitter.svg",
+    "youtube": "assets/youtube.svg"
+  },
+  "color_schemes": {
+    "yellow-light": {
+      "primary": "1b1b1b",
+      "secondary": "ffffff",
+      "tertiary": "333333",
+      "quaternary": "b886ff",
+      "header_background": "ffef3f",
+      "header_primary": "333333",
+      "highlight": "4a3dff",
+      "selected": "eeeeee",
+      "hover": "cccccc",
+      "danger": "ff6c6c",
+      "success": "08f69f",
+      "love": "ff5e5e"
+    },
+    "radiant": {
+      "primary": "000000",
+      "secondary": "ffffff",
+      "tertiary": "ffef3f",
+      "quaternary": "e45735",
+      "header_background": "ffffff",
+      "header_primary": "4d4d4d",
+      "highlight": "ffff4d",
+      "selected": "d1f0ff",
+      "hover": "f2f2f2",
+      "danger": "c80001",
+      "success": "009900",
+      "love": "fa6c8d"
+    }
+  },
+  "modifiers": {
+  },
+  "learn_more": "https://meta.discourse.org/t/beginners-guide-to-using-discourse-themes/91966"
+}

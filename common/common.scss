@@ -1,0 +1,269 @@
+@import "variables";
+@import "custom";
+@import "button_in_topic";
+
+// INPUT FIELDS - SELECT - DROPDOWNS
+// *------------------------------------------------*
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+textarea {
+  border-radius: $radius-2;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+textarea:focus {
+  border-color: $color-royal;
+  box-shadow: none;
+  border-radius: $radius-2;
+  outline: none;
+}
+
+.d-time-input .fields,
+.d-date-time-input,
+.d-date-time-input-range {
+  border-color: $primary-medium;
+}
+
+.select-kit {
+  outline: none;
+  .select-kit-collection {
+    background: $color-cream;
+  }
+  .select-kit-body {
+    background: $color-cream;
+  }
+  &.combo-box {
+    .select-kit-header {
+      border-radius: $radius-2;
+      outline: none;
+    }
+    &.category-chooser {
+      .category-desc {
+        color: $color-black;
+      }
+    }
+  }
+
+  &.multi-select {
+    .multi-select-header {
+      border-radius: $radius-2;
+      outline: none;
+      &.is-focused {
+        box-shadow: shadow("focus");
+        border-color: $color-royal;
+        border-radius: $radius-2;
+        outline: none;
+      }
+    }
+    &.is-expanded {
+      .select-kit-wrapper {
+        border-color: $color-royal;
+        border-radius: $radius-2;
+        box-shadow: none;
+        outline: none;
+      }
+      .multi-select-header {
+        border-color: $color-royal;
+        outline: none;
+      }
+    }
+  }
+}
+
+// MODAL
+// *------------------------------------------------*
+.modal-inner-container {
+  box-shadow: 0 8px 60px 0 rgba(103, 151, 255, 0.15),
+    0 12px 90px 0 rgba(103, 151, 255, 0.15);
+  border-radius: $radius-8;
+}
+
+.modal-header {
+  border-bottom: 1px solid $color-mud;
+}
+
+.modal-footer {
+  border-top: 1px solid $color-mud;
+  border: 0;
+}
+
+.inline-modal {
+  .modal-inner-container {
+    border: 0;
+  }
+}
+
+.bootbox {
+  &.modal {
+    border-radius: $radius-2;
+  }
+}
+
+// Header
+// *------------------------------------------------*
+.d-header {
+  // background-color: $color-white; MODIFIED: don't override background color of header
+  box-shadow: none;
+  height: 5em;
+  .d-header-icons {
+    .d-icon {
+      color: $header_primary;
+      font-size: 1.511em;
+    }
+  }
+}
+
+.menu-panel .panel-body-bottom .btn {
+  background: $color-turqoise;
+  &.btn:hover {
+    background: $color-green;
+  }
+}
+
+.menu-panel.drop-down {
+  border-radius: $radius-20;
+  box-shadow: 0 8px 60px 0 rgba(255, 103, 222, 0.15),
+    0 12px 90px 0 rgba(255, 103, 217, 0.15);
+}
+
+.search-menu input[type="text"] {
+  border-radius: $radius-8;
+}
+
+
+// Buttons
+// *------------------------------------------------*
+#create-topic {
+  border: 2px solid $color-royal;
+  background-color: $color-royal;
+  border-radius: 10px;
+  color: $color-white;
+  transition: 0.3s;
+  .fa {
+    color: $color-white;
+  }
+}
+#create-topic:hover {
+  box-shadow: 8px 8px $color-light-violet;
+  transition: 0.3s;
+}
+
+// MODIFIED: don't highlight nav bar buttons
+:not(.sidebar-section-header,.sidebar-more-section-links-details-summary).btn {
+  border-radius: $radius-4;
+  background: $color-mud;
+  color: $primary-high;
+  .d-icon {
+    color: $primary-high;
+  }
+  .discourse-no-touch & {
+    &:hover,
+    &.btn-hover {
+      color: $color-white;
+      background: $tertiary-hover;
+      .d-icon {
+        color: $color-white;
+      }
+    }
+  }
+  &:hover,
+  &.btn-hover {
+    color: $primary-high;
+    background: $color-mud;
+    .d-icon {
+      color: $primary-high;
+    }
+  }
+  &:active,
+  &.btn-active {
+    background-image: none;
+    background-color: $color-mud;
+    color: $primary-high;
+    .d-icon {
+      color: $primary-high;
+    }
+  }
+}
+
+.btn-danger {
+  background: $danger;
+  color: $color-white;
+  .discourse-no-touch & {
+    &:hover,
+    &.btn-hover {
+      background: $danger-hover;
+    }
+  }
+}
+
+// Topic List
+// *------------------------------------------------*
+.topic-list {
+  .topic-list-body {
+    border-top: 2px solid $color-turqoise;
+    .topic-list-item {
+      border-bottom: 1px solid $color-turqoise;
+    }
+  }
+}
+
+// Search
+// *------------------------------------------------*
+.search-container .search-advanced-sidebar {
+  .search-advanced-title {
+    background: $color-mud;
+    border-radius: 10px 10px 0 0;
+    color: $primary-high;
+  }
+  .search-advanced-filters {
+    background: none;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid $color-mud;
+  }
+}
+
+// Admin
+// *------------------------------------------------*
+.admin-controls {
+  .nav-pills > li a.active {
+    background: none;
+    color: $tertiary;
+  }
+}
+
+.popup-menu .btn {
+  color: $color-black;
+}
+
+.btn[href] {
+  color: $color-white;
+}
+
+.btn[href] {
+  color: $color-black;
+}
